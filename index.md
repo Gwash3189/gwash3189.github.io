@@ -2,7 +2,7 @@ My names Adam. I'm a Developer [@Zendesk](https://www.zendesk.com/jobs/) from Me
 
 I dabble in other languages as i have a real passion for learning new things. The web is my favourite platform, i love that it never stops progressing.
 
-All of the open source work is available on my <a href="https://github.com/Gwash3189" target="_blank">github</a> account.
+All of the open source work is available on my [github](https://github.com/Gwash3189) account.
 
 Most recently i've been spending my time with
 
