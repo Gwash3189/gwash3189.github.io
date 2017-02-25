@@ -1,37 +1,15 @@
-## Welcome to GitHub Pages
+My names Adam. I'm a Developer [@Zendesk](https://www.zendesk.com/jobs/) from Melbourn, Aus. I have been programming for fun and professionally since 2011. I started with C and Java, but quickly moved into web development with PHP and JavaScript. Now, I mostly live in the Frontend world. However, i do jump into the backend every now and then.
 
-You can use the [editor on GitHub](https://github.com/Gwash3189/gwash3189.github.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+I dabble in other languages as i have a real passion for learning new things. The web is my favourite platform, i love that it never stops progressing.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+All of the open source work is available on my <a href="https://github.com/Gwash3189" target="_blank">github</a> account.
 
-### Markdown
+Most recently i've been spending my time with
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+ * React
+ * Redux
+ * Elixir
+ * Ruby
+ * Node.js
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Gwash3189/gwash3189.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+If you would like to contact me i can be reached at [beck.web.adam at gmail.com](mailto:beck.web.adam@gmail.com)
