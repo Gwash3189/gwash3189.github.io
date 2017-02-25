@@ -1,6 +1,14 @@
 <style>
 body {
   background-color: #fdf6e3;
+  font-family: 'Inconsolata', monospace;
+  color: #657b83;
+}
+
+.title {
+  text-align: center;
+  width: 100%;
+  height: 36px;
 }
 
 .container {
@@ -14,26 +22,45 @@ body {
 .nav {
   list-style-type: none;
   text-align: center;
+  position: absolute;
+  top: 25%;
 }
 
 .nav-item {
   font-size: 180%;
-  font-family: 'Inconsolata', monospace;
-  padding: 20px;
+  padding-bottom: 40px;
   text-decoration: none;
 }
 
-.link { text-decoration: none; color: #657b83}
-.link:visited { text-decoration: none; }
+.link { text-decoration: none; color: #657b83;}
+.link:visited { text-decoration: none; color: #657b83;}
 .link:hover { text-decoration: none; color: #586e75; background-color: #eee8d5;}
 .link:focus { text-decoration: none; }
 </style>
 
+<h1 class="title" id="typewriter"></h1>
 <div class="container">
   <ul class="nav">
-    <li class="nav-item">Adam Beck, software developer <a class="link" href="https://www.zendesk.com">@Zendesk</a></li>
     <li class="nav-item"><a class="link" href="https://twitter.com/Adsa_B">@Twttier</a></li>
     <li class="nav-item"><a class="link" href="https://github.com/Gwash3189">@Github</a></li>
     <li class="nav-item"><a class="link" href="mailto:beck.web.adam@gmail.com">@Email</a></li>
   </ul>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.4/typed.min.js"></script>
+<script>
+  $(() => {
+    $("#typewriter").typed({
+      strings: [
+        'Hi 👋, I\'m Adam Beck.',
+        'I\'m a Software Engineer @ Zendesk.',
+        'I do fullstack things with JS and Ruby.',
+        'I also write Elixir in my free time.',
+        'Adam Beck - Software Engineer.'
+      ],
+      backDelay: 1000,
+      showCursor: false,
+    })
+  })
+</script>
