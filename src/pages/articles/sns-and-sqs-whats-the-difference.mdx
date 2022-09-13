@@ -1,0 +1,133 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const meta = {
+  author: 'Adam Beck',
+  date: '2022-09-13',
+  title: "SNS and SQS: What's the difference?",
+  description:
+    "SNS and SQS are notification and queueing systems from AWS, but what's the difference?",
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+[Simple Notification System (SNS)](https://aws.amazon.com/sns) and
+[Simple Queuing System (SQS)](https://aws.amazon.com/sqs) are services from AWS
+that provide notifications and queueing, respectively. Now, I've used both SNS
+and SQS several times throughout my career, and each time, I need to
+google the difference between the two. There is enough time between I stop
+using these services and when I start using them again that I ask myself,
+"which one is which, again?".
+
+To (hopefully) prevent me from googling this again, I thought I'd write it
+down and provide some examples of what SQS and SNS are and how they differ
+from one another.
+
+### What is SQS?
+
+SQS is a **queueing** service. And when I say **queueing**, I mean
+**queueing**; a list of messages processed (usually) in a first in,
+first out order. Processes that want to do _stuff_ with those messages poll the
+queue on their schedule. A simple JS example of this would look like this:
+
+```js
+let queue = [
+  'first in, first out',
+  'last in, last out'
+]
+
+async function handleMessage(message) {
+  // do something with the message
+  // create a user, delete a user, update permissions
+  return
+}
+
+async function poll(queue, callback) {
+  if (queue.length <= 0) {
+    return []
+  }
+
+  const [firstMessage, ...messages] = queue
+  await callback(firstMessage)
+  return messages
+}
+
+
+let id = setInterval(async () => {
+  console.log('processing the queue')
+  queue = await poll(queue, handleMessage)
+  console.log('queue length: ', queue.length)
+
+  if (queue.length === 0) {
+    // stop interval when queue is empty
+    clearInterval(id)
+    console.log('Done processing')
+    process.exit(0)
+  }
+}, 1000) // 1 second
+```
+
+With queues, it's the process's responsibility to poll the queue. The queue won't
+inform any interested parties that there is a new message in the queue. Further,
+once a message has been taken from the queue, it's no longer available for
+other processes. Queues are suitable for work you only want to be done once, such as
+sending a new user email, creating a user, or scrubbing PII.
+Queues are also a great mechanism to use when communicating between
+services. They take asynchronous processes and make them (somewhat) synchronous.
+Queues also don't require that the things processing the messages be online.
+If a process is down, that's ok. The message will be there when it comes back
+online and polls. With SQS, specifically, messages are stored
+anywhere between 1 minute to 14 days.
+
+### What is SNS?
+
+SNS is a **notification** service. A helpful mental model is to think of this as
+the push notifications you receive on your phone. With push notifications, you
+don't open your phone and ask it to check for push notifications; they just
+show up.
+
+Picking up your phone and asking if it has any notifications would be the
+same as polling a queue. However, with SNS, it notifies you. Additionally,
+it notifies _all_ subscribers of the message. This implementation differs from our queue example,
+where only one process would get the message before it was removed from the queue.
+An example implementation of this would look like this:
+
+```js
+function register(arrOrApi, callback) {
+  const api = {
+    queue: arrOrApi.queue || arrOrApi,
+    push: (message) => api.subscribers
+      .forEach((subscriber) => subscriber(message)),
+    subscribers: [...(arrOrApi.subscribers || []), callback]
+  }
+
+  return api
+}
+
+let notifications = register(
+  [],
+  (message) => console.log('first: ', message)
+)
+notifications = register(
+  notifications,
+  (message) => console.log('second: ', message)
+)
+
+notifications.push('this is a message')
+notifications.push('and so is this')
+```
+
+In this example, the processes don't need to poll for messages; they're notified.
+This means that the process must be online when the message comes through
+the notification system and once it runs through the notification system,
+it's gone.
+
+### Summary
+
+SNS is a notification system that notifies subscribers. It's good for processing
+the same notification in multiple ways, such as processing an image, sending an email
+and creating a thumbnail in parallel.
+
+SQS is a queueing system that serves as a list of work to be done by polling processes.
+Queues, or SQS, is good for when you have a lot of the same thing all the time. Such as
+creating users, updating permissions, or processing a large number of images as they come in.
+
